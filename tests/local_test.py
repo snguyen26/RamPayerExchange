@@ -129,20 +129,20 @@ if __name__ == '__main__':
         }, [eosio_token])
 
     # Distribute initial quantities of EOS & BOID
-    eosioToken_c.push_action(
-        'issue',
-        {
-            'to': acct1,
-            'quantity': '1000.0000 EOS',
-            'memo': 'memo'
-        }, [eos])
-    eosioToken_c.push_action(
-        'issue',
-        {
-            'to': acct2,
-            'quantity': '2000.0000 EOS',
-            'memo': 'memo'
-        }, [eos])
+    # eosioToken_c.push_action(
+    #     'issue',
+    #     {
+    #         'to': acct1,
+    #         'quantity': '1000.0000 EOS',
+    #         'memo': 'memo'
+    #     }, [eos])
+    # eosioToken_c.push_action(
+    #     'issue',
+    #     {
+    #         'to': acct2,
+    #         'quantity': '2000.0000 EOS',
+    #         'memo': 'memo'
+    #     }, [eos])
     
     eosioToken_c.push_action(
         'issue',
@@ -152,14 +152,6 @@ if __name__ == '__main__':
             'memo': 'memo'
         }, [boid])
 
-    # eosioToken_c.push_action(
-    #     'issue',
-    #     {
-    #         'to': acct2,
-    #         'quantity': '1000.0000 BOID',
-    #         'memo': 'memo'
-    #     }, [boid])
-
     print(eosioToken_c.table("accounts", boid))
     print(eosioToken_c.table("accounts", acct1))
     print(eosioToken_c.table("accounts", acct2))
@@ -168,7 +160,6 @@ if __name__ == '__main__':
     boid.info()
     acct1.info()
     acct2.info()
-    # acct3.info()
 
     # first transfer of boid 
     eosioToken_c.push_action(
@@ -178,7 +169,7 @@ if __name__ == '__main__':
             'to': acct1,
             'quantity': '100.0000 BOID',
             'memo': 'memo'
-        }, [boid,acct2])
+        }, [boid])
 
     eosioToken_c.push_action(
         'transfer',
@@ -187,7 +178,7 @@ if __name__ == '__main__':
             'to': acct2,
             'quantity': '125.0000 BOID',
             'memo': 'memo'
-        }, [boid,acct2])
+        }, [boid])
 
     print(eosioToken_c.table("accounts", boid))
     print(eosioToken_c.table("accounts", acct1))
@@ -196,7 +187,6 @@ if __name__ == '__main__':
     boid.info()
     acct1.info()
     acct2.info()
-    # acct3.info()
 
     # 2nd transfer of boid:
     eosioToken_c.push_action(
@@ -217,13 +207,22 @@ if __name__ == '__main__':
             'memo': 'memo'
         }, [boid,acct2])
 
-    print(eosioToken_c.table("accounts", boid))
-    print(eosioToken_c.table("accounts", acct1))
-    print(eosioToken_c.table("accounts", acct2))
-
     boid.info()
     acct1.info()
     acct2.info()
+
+    eosioToken_c.push_action(
+        'transfer',
+        {   
+            'from': boid,
+            'to': acct1,
+            'quantity': '150.0000 BOID',
+            'memo': 'memo'
+        }, [boid])
+        
+
+    boid.info()
+    acct1.info()
 
     # stop the testnet and exit python
     eosf.stop()
